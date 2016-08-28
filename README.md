@@ -1,3 +1,18 @@
+**This is a FORK of https://github.com/lawl/netclip**
+
+Changes:
+
+- Autosize icon image
+- Fix issue with Unicode characters
+- Handle exception when clipboard is busy
+- Ignore updates from 'self'
+- Send update when clipboard is emptied
+
+Changes are licensed under the same terms as the original
+
+| Original README |
+|-----------------|
+
 netclip
 =======
 
