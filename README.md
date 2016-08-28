@@ -10,8 +10,7 @@ Changes:
 
 Changes are licensed under the same terms as the original
 
-| Original README |
-|-----------------|
+# Original README
 
 netclip
 =======
