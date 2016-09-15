@@ -18,41 +18,39 @@ import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 
 public class TrayMenu implements ItemListener, ActionListener {
-	public static void init(boolean shareClip){
-	
+	public static void init(boolean shareClip) {
 		if (!SystemTray.isSupported()) {
 			System.out.println("System tray no supported. not displaying quicksettings icon");
 			return;
 		}
-		
+
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		}catch (Exception e) {
 			System.err.println("Couldn't set system look & feel");
 		}
-		
-		PopupMenu popMenu = new PopupMenu(); 
-		
+
+		PopupMenu popMenu = new PopupMenu();
+
 		CheckboxMenuItem mnuRcvonly = new CheckboxMenuItem("Share Clipboard");
 		MenuItem mnuClose = new MenuItem("Close");
-		
+
 		TrayMenu listeners = new TrayMenu();
-		
+
 		mnuRcvonly.addItemListener(listeners);
 		mnuClose.addActionListener(listeners);
-		
+
 		mnuRcvonly.setState(shareClip);
-		
+
 		popMenu.add(mnuRcvonly);
 		popMenu.addSeparator();
 		popMenu.add(mnuClose);
-		
-		
-		ClassLoader loader = Thread.currentThread().getContextClassLoader();           
+
+		ClassLoader loader = Thread.currentThread().getContextClassLoader();
 		InputStream stream = loader.getResourceAsStream("netclip.png");
 
 		Image trayimg;
-		
+
 		try {
 			trayimg = ImageIO.read(stream);
 			TrayIcon trayIcon = new TrayIcon(trayimg, "netclip", popMenu);
@@ -67,20 +65,18 @@ public class TrayMenu implements ItemListener, ActionListener {
 			e.printStackTrace();
 			return;
 		}
-		
 	}
-	
+
 	public void itemStateChanged(ItemEvent e) {
-	    if (e.getStateChange() == ItemEvent.SELECTED) {
-	    	NetClipboard.setListenOnly(false);
-	    } else {
-	    	NetClipboard.setListenOnly(true);
-	    }
+		if (e.getStateChange() == ItemEvent.SELECTED) {
+			NetClipboard.setListenOnly(false);
+		} else {
+			NetClipboard.setListenOnly(true);
+		}
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		System.exit(0);
 	}
-
 }

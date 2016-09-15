@@ -41,6 +41,7 @@ public class NetClipboard {
 	public static synchronized void setData(byte[] data) {
 		NetClipboard.data = data;
 	}
+
 	public static synchronized void update() {
 		try {
 			String newData = new String(data, "UTF-8");
@@ -50,6 +51,6 @@ public class NetClipboard {
 		} catch (UnsupportedEncodingException e) {
 			System.err.println("Couldn't update clipboard data!");
 			e.printStackTrace();
-		} 
+		}
 	}
 }

@@ -7,8 +7,6 @@ import java.io.IOException;
 import java.lang.IllegalStateException;
 
 public class ClipboardObserver implements Runnable {
-
-
 	UDPServer broadcaster = null;
 
 	public ClipboardObserver(UDPServer broadcaster) {
@@ -17,7 +15,7 @@ public class ClipboardObserver implements Runnable {
 
 	public void run() {
 		System.out.println("Observer running");
-		while(true){
+		while(true) {
 			try {
 				if (!NetClipboard.isListenOnly()) {
 					final Transferable clipboardRaw = NetClipboard.getClipboard().getContents(null);

@@ -11,7 +11,7 @@ import java.net.UnknownHostException;
 public class UDPReceiver implements Runnable {
 	DatagramSocket socket;
 	int port;
-	
+
 	public UDPReceiver(int port) {
 		this.port=port;
 		try {
@@ -22,10 +22,10 @@ public class UDPReceiver implements Runnable {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public void run() {
 		System.out.println("Listening for input");
-		while(true) { 
+		while(true) {
 			byte[] recvBuf = new byte[14];
 			DatagramPacket packet = new DatagramPacket(recvBuf, recvBuf.length);
 			try {
@@ -36,11 +36,10 @@ public class UDPReceiver implements Runnable {
 				if (NetworkInterface.getByInetAddress(addr) == null) {
 					if ("NETCLIP_NOTIFY".equals(new String(packet.getData()))) {
 						System.out.println("Fetching Clipboard Data via TCP");
-						NetClipboard.setData(TCPClient.fetchClipboard(packet.getAddress(),port));
+						NetClipboard.setData(TCPClient.fetchClipboard(packet.getAddress(), port));
 						NetClipboard.update();
 					}
 				}
-				
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

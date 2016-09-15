@@ -9,7 +9,7 @@ public class TCPClient {
 	public static byte[] fetchClipboard(InetAddress adr, int port) {
 		try {
 			Socket clientSocket = new Socket(adr.getHostAddress(), port);
-			
+
 			InputStream is = clientSocket.getInputStream();
 
 			ByteArrayOutputStream buffer = new ByteArrayOutputStream();
@@ -22,10 +22,10 @@ public class TCPClient {
 			}
 
 			buffer.flush();
-			
+
 			is.close();
 			clientSocket.close();
-			
+
 			byte[] content = Crypto.decrypt(buffer.toByteArray());
 			System.out.println("TCP : " + new String(content));
 			return content;
