@@ -2,10 +2,10 @@
 
 Changes:
 
-- Autosize icon image
-- Fix issue with Unicode characters
-- Handle exception when clipboard is busy
-- Ignore updates from 'self'
+- Autosize icon image (merged uptream)
+- Fix issue with Unicode characters (merged upstream)
+- Handle exception when clipboard is busy (merged upstream)
+- Ignore updates from 'self' (merged upstream)
 - Send update when clipboard is emptied
 
 Changes are licensed under the same terms as the original
