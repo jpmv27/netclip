@@ -10,12 +10,12 @@ public class ClipboardObserver implements Runnable {
 	UDPServer broadcaster = null;
 
 	public ClipboardObserver(UDPServer broadcaster) {
-		this.broadcaster=broadcaster;
+		this.broadcaster = broadcaster;
 	}
 
 	public void run() {
 		System.out.println("Observer running");
-		while(true) {
+		while (true) {
 			try {
 				if (!NetClipboard.isListenOnly()) {
 					final Transferable clipboardRaw = NetClipboard.getClipboard().getContents(null);
@@ -23,8 +23,7 @@ public class ClipboardObserver implements Runnable {
 
 					if ((clipboardRaw == null) || (clipboardRaw.getTransferDataFlavors().length == 0)) {
 						clipboardData = "";
-					}
-					else if (clipboardRaw.isDataFlavorSupported(DataFlavor.stringFlavor)) {
+					} else if (clipboardRaw.isDataFlavorSupported(DataFlavor.stringFlavor)) {
 						clipboardData = (String) clipboardRaw.getTransferData(DataFlavor.stringFlavor);
 					}
 

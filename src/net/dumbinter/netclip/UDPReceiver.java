@@ -13,7 +13,7 @@ public class UDPReceiver implements Runnable {
 	int port;
 
 	public UDPReceiver(int port) {
-		this.port=port;
+		this.port = port;
 		try {
 			socket = new DatagramSocket(port, InetAddress.getByName("0.0.0.0"));
 			socket.setBroadcast(true);
@@ -25,7 +25,7 @@ public class UDPReceiver implements Runnable {
 
 	public void run() {
 		System.out.println("Listening for input");
-		while(true) {
+		while (true) {
 			byte[] recvBuf = new byte[14];
 			DatagramPacket packet = new DatagramPacket(recvBuf, recvBuf.length);
 			try {

@@ -17,13 +17,13 @@ public class TCPServer implements Runnable {
 	}
 
 	public void run() {
-		while(true) {
+		while (true) {
 			try {
 				Socket connectionSocket = welcomeSocket.accept();
 				DataOutputStream outToClient = new DataOutputStream(connectionSocket.getOutputStream());
 				byte[] data;
-				if(NetClipboard.isListenOnly()) {
-					data=new String("").getBytes("US-ASCII");
+				if (NetClipboard.isListenOnly()) {
+					data = new String("").getBytes("US-ASCII");
 				} else {
 					data = Crypto.encrypt(NetClipboard.getData());
 				}

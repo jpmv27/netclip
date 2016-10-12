@@ -15,8 +15,8 @@ public class UDPServer {
 
 	public UDPServer(String broadcast, int port) {
 		try {
-			this.port=port;
-			socket = new DatagramSocket (null);
+			this.port = port;
+			socket = new DatagramSocket(null);
 			socket.setBroadcast(true);
 			host = InetAddress.getByName(broadcast);
 		} catch (SocketException | UnknownHostException e) {
@@ -28,7 +28,7 @@ public class UDPServer {
 	public void broadcast() throws UnsupportedEncodingException {
 		DatagramPacket packet;
 		byte[] buf = "NETCLIP_NOTIFY".getBytes("US-ASCII");
-		packet=new DatagramPacket (buf, buf.length, host, port);
+		packet = new DatagramPacket(buf, buf.length, host, port);
 		try {
 			socket.send(packet);
 		} catch (IOException e) {

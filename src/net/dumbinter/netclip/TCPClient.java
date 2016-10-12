@@ -18,7 +18,7 @@ public class TCPClient {
 			byte[] data = new byte[16384];
 
 			while ((nRead = is.read(data, 0, data.length)) != -1) {
-			  buffer.write(data, 0, nRead);
+				buffer.write(data, 0, nRead);
 			}
 
 			buffer.flush();

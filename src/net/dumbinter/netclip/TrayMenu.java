@@ -26,7 +26,7 @@ public class TrayMenu implements ItemListener, ActionListener {
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
-		}catch (Exception e) {
+		} catch (Exception e) {
 			System.err.println("Couldn't set system look & feel");
 		}
 

@@ -15,7 +15,7 @@ public class Config {
 	}
 
 	public static Properties get() {
-		if(!initialized) {
+		if (!initialized) {
 			try {
 				read();
 			} catch (IOException e) {

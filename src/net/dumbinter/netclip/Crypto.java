@@ -22,7 +22,7 @@ public class Crypto {
 	public static void init(int aesKeysize) throws UnsupportedEncodingException {
 		keyValue = Config.get().getProperty("netclip.key").getBytes("US-ASCII");
 		sr = new SecureRandom();
-		Crypto.aesKeysize=aesKeysize;
+		Crypto.aesKeysize = aesKeysize;
 	}
 
 	public static synchronized byte[] encrypt(byte[] data) throws Exception {
@@ -62,7 +62,7 @@ public class Crypto {
 	private static Key generateKey() throws Exception {
 		SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 		KeySpec spec = new PBEKeySpec(new String(keyValue).toCharArray(),
-				new byte[] {1, 3, 3, 7, 4, 2, 2, 3, 1, 3, 3, 7, 4, 2, 2, 3}, 65536, aesKeysize);
+		                              new byte[] {1, 3, 3, 7, 4, 2, 2, 3, 1, 3, 3, 7, 4, 2, 2, 3}, 65536, aesKeysize);
 		SecretKey tmp = factory.generateSecret(spec);
 		SecretKey secret = new SecretKeySpec(tmp.getEncoded(), "AES");
 		return secret;
@@ -79,7 +79,7 @@ public class Crypto {
 
 	public static String bytesToHex(byte[] bytes) {
 		char[] hexChars = new char[bytes.length * 2];
-		for ( int j = 0; j < bytes.length; j++ ) {
+		for (int j = 0; j < bytes.length; j++) {
 			int v = bytes[j] & 0xFF;
 			hexChars[j * 2] = hexArray[v >>> 4];
 			hexChars[j * 2 + 1] = hexArray[v & 0x0F];
