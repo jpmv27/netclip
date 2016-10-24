@@ -7,6 +7,8 @@ Changes:
 - Handle exception when clipboard is busy (merged upstream)
 - Ignore updates from 'self' (merged upstream)
 - Send update when clipboard is emptied
+- Use Logger for logging
+- Catch and log all exceptions
 
 Changes are licensed under the same terms as the original
 
