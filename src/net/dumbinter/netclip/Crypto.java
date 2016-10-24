@@ -1,10 +1,12 @@
 package net.dumbinter.netclip;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.Key;
 import java.security.SecureRandom;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
+import java.util.logging.Logger;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -14,19 +16,20 @@ import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.SecretKeySpec;
 
 public class Crypto {
+	private static Logger logger = Logger.getLogger("net.dumbinter.netclip.crypto");
 	private static final String ALGO = "AES/CBC/PKCS5Padding";
 	private static byte[] keyValue = null;
 	private static SecureRandom sr;
 	private static int aesKeysize;
 
-	public static void init(int aesKeysize) throws UnsupportedEncodingException {
+	public static void init(int aesKeysize) throws IOException, UnsupportedEncodingException {
 		keyValue = Config.get().getProperty("netclip.key").getBytes("US-ASCII");
 		sr = new SecureRandom();
 		Crypto.aesKeysize = aesKeysize;
 	}
 
 	public static synchronized byte[] encrypt(byte[] data) throws Exception {
-		System.out.println("Encrypting: " + bytesToHex(data));
+		logger.info("Encrypting: " + bytesToHex(data));
 
 		Key key = generateKey();
 		Cipher c = Cipher.getInstance(ALGO);
@@ -36,13 +39,13 @@ public class Crypto {
 		c.init(Cipher.ENCRYPT_MODE, key, new IvParameterSpec(iv));
 		byte[] encVal = c.doFinal(data);
 
-		System.out.println("Encrypted: " + bytesToHex(encVal));
+		logger.info("Encrypted: " + bytesToHex(encVal));
 
 		return concatByteArray(iv, encVal);
 	}
 
 	public static synchronized byte[] decrypt(byte[] encryptedData) throws Exception {
-		System.out.println("Decrypting: " + bytesToHex(encryptedData));
+		logger.info("Decrypting: " + bytesToHex(encryptedData));
 
 		Key key = generateKey();
 		Cipher c = Cipher.getInstance(ALGO);
@@ -54,7 +57,7 @@ public class Crypto {
 		c.init(Cipher.DECRYPT_MODE, key, new IvParameterSpec(iv));
 		byte[] decValue = c.doFinal(data);
 
-		System.out.println("Decrypted: " + bytesToHex(decValue));
+		logger.info("Decrypted: " + bytesToHex(decValue));
 
 		return decValue;
 	}

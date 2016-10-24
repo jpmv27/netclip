@@ -4,8 +4,12 @@ import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TCPClient {
+	private static Logger logger = Logger.getLogger("net.dumbinter.netclip.tcpclient");
+
 	public static byte[] fetchClipboard(InetAddress adr, int port) {
 		try {
 			Socket clientSocket = new Socket(adr.getHostAddress(), port);
@@ -27,11 +31,10 @@ public class TCPClient {
 			clientSocket.close();
 
 			byte[] content = Crypto.decrypt(buffer.toByteArray());
-			System.out.println("TCP : " + new String(content));
+			logger.info("TCP: " + new String(content));
 			return content;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			logger.log(Level.SEVERE, "Unexpected exception", e);
 		}
 		return null;
 	}

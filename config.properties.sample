@@ -1,3 +1,5 @@
+netclip.loglevel=WARNING
+
 netclip.port=6234
 netclip.key=topsecret
 netclip.broadcast=255.255.255.255

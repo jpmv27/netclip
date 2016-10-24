@@ -13,21 +13,25 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import javax.imageio.ImageIO;
 import javax.swing.UIManager;
 
 public class TrayMenu implements ItemListener, ActionListener {
+	private static Logger logger = Logger.getLogger("net.dumbinter.netclip.traymenu");
+
 	public static void init(boolean shareClip) {
 		if (!SystemTray.isSupported()) {
-			System.out.println("System tray no supported. not displaying quicksettings icon");
+			logger.warning("System tray not supported. Not displaying quicksettings icon");
 			return;
 		}
 
 		try {
 			UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
 		} catch (Exception e) {
-			System.err.println("Couldn't set system look & feel");
+			logger.log(Level.WARNING, "Couldn't set system look & feel", e);
 		}
 
 		PopupMenu popMenu = new PopupMenu();
@@ -57,13 +61,9 @@ public class TrayMenu implements ItemListener, ActionListener {
 			trayIcon.setImageAutoSize(true);
 			SystemTray.getSystemTray().add(trayIcon);
 		} catch (AWTException e) {
-			System.out.println("Couldn't add tray image");
-			e.printStackTrace();
-			return;
+			logger.log(Level.WARNING, "Couldn't add tray image", e);
 		} catch (IOException e) {
-			System.out.println("Couldn't read try image");
-			e.printStackTrace();
-			return;
+			logger.log(Level.WARNING, "Couldn't read tray image", e);
 		}
 	}
 

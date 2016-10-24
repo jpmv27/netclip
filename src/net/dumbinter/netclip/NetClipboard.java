@@ -3,8 +3,11 @@ package net.dumbinter.netclip;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.io.UnsupportedEncodingException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class NetClipboard {
+	private static Logger logger = Logger.getLogger("net.dumbinter.netclip.netclipboard");
 	private static byte[] data;
 	private static Clipboard clipboard = null;
 	private static String lastData = "";
@@ -49,8 +52,9 @@ public class NetClipboard {
 			clipboard.setContents(stringSelection, null);
 			lastData = newData;
 		} catch (UnsupportedEncodingException e) {
-			System.err.println("Couldn't update clipboard data!");
-			e.printStackTrace();
+			logger.log(Level.WARNING, "Couldn't read clipboard data", e);
+		} catch (Exception e) {
+			logger.log(Level.SEVERE, "Unexpected exception", e);
 		}
 	}
 }

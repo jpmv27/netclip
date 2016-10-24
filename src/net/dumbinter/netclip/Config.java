@@ -1,7 +1,7 @@
 package net.dumbinter.netclip;
 
-import java.io.IOException;
 import java.io.InputStream;
+import java.io.IOException;
 import java.util.Properties;
 
 public class Config {
@@ -14,14 +14,9 @@ public class Config {
 		prop.load(stream);
 	}
 
-	public static Properties get() {
+	public static Properties get() throws IOException {
 		if (!initialized) {
-			try {
-				read();
-			} catch (IOException e) {
-				e.printStackTrace();
-				System.exit(-1);
-			}
+			read();
 		}
 		return prop;
 	}

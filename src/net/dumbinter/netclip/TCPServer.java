@@ -4,16 +4,15 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class TCPServer implements Runnable {
+	private static Logger logger = Logger.getLogger("net.dumbinter.netclip.tcpserver");
 	ServerSocket welcomeSocket = null;
 
-	public TCPServer(Integer port) {
-		try {
-			welcomeSocket = new ServerSocket(port);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+	public TCPServer(Integer port) throws IOException {
+		welcomeSocket = new ServerSocket(port);
 	}
 
 	public void run() {
@@ -31,7 +30,7 @@ public class TCPServer implements Runnable {
 				outToClient.close();
 				connectionSocket.close();
 			} catch (Exception e) {
-				e.printStackTrace();
+				logger.log(Level.SEVERE, "Unexpected exception", e);
 			}
 		}
 	}
